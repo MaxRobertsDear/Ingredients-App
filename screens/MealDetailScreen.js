@@ -1,13 +1,22 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 
-const MealDetailsScreen = props => {
-  <View>
-    <Text>This is the Meal Details Screen</Text>
-  </View>;
+const MealDetailScreen = props => {
+  return (
+    <View style={styles.screen}>
+      <Text>This is the Meal Details Screen</Text>
+      <Button
+        title='Go Back'
+        onPress={() => {
+          props.navigation.goBack();
+        }}
+      />
+    </View>
+  );
 };
 
-styles = StyleSheet.create({
+const styles = StyleSheet.create({
   screen: {
     flex: 1,
     justifyContent: 'center',
@@ -15,4 +24,4 @@ styles = StyleSheet.create({
   },
 });
 
-export default MealDetailsScreen;
+export default MealDetailScreen;

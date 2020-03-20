@@ -1,19 +1,36 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { FlatList } from 'react-native';
 
-const CategoriesScreen = () => {
-  <View style={styles.screen}>
-    <Text>This is the Categories Screen</Text>
-  </View>;
+import { CATEGORIES } from '../data/dummy-data';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import CategoryGridTile from '../components/CategoryGridTile';
+
+const CategoriesScreen = props => {
+  const renderGridItem = itemData => {
+    return (
+      <CategoryGridTile
+        title={itemData.item.title}
+        color={itemData.item.color}
+        onSelect={() => {
+          props.navigation.navigate('CategoryMeal', {
+            categoryId: itemData.item.id,
+          });
+        }}
+      />
+    );
+  };
+
+  return (
+    <FlatList numColumns={2} data={CATEGORIES} renderItem={renderGridItem} />
+  );
 };
 
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
+CategoriesScreen.navigationOptions = {
+  headerTitle: 'Meal Categories',
+  headerStyle: {
+    backgroundColor: Colors.primaryColor,
   },
-});
+};
 
 export default CategoriesScreen;

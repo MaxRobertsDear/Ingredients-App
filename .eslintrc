@@ -6,12 +6,15 @@
       "jsx": true
     }
   },
-  "extends": ["eslint:recommended", "eslint-config-prettier", "plugin:react/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "eslint-config-prettier",
+    "plugin:react/recommended"
+  ],
   "rules": {
     "react/jsx-uses-react": "error",
-    "react/jsx-uses-vars": "error",
-  }, 
-  "plugins": [
-    "react"
-  ]
+    "react/jsx-uses-vars": "error"
+  },
+  "plugins": ["react"],
+  "globals": { "require": true }
 }

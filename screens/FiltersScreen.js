@@ -1,13 +1,15 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const Filterscreen = props => {
-  <View>
-    <Text>This is the Filters Screen</Text>
-  </View>;
+const Filterscreen = () => {
+  return (
+    <View style={styles.screen}>
+      <Text>This is the Filters Screen</Text>
+    </View>
+  );
 };
 
-styles = StyleSheet.create({
+const styles = StyleSheet.create({
   screen: {
     flex: 1,
     justifyContent: 'center',
