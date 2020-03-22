@@ -1,15 +1,24 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 
-const MealDetailScreen = props => {
+import { MEALS } from '../data/dummy-data';
+
+const MealDetailScreen = ({ navigation, route }) => {
+  const mealId = route.params.mealId;
+
+  const selectedMeal = MEALS.find(meal => meal.id === mealId);
+
+  useEffect(() => {
+    navigation.setOptions({ title: selectedMeal.title });
+  });
   return (
     <View style={styles.screen}>
-      <Text>This is the Meal Details Screen</Text>
+      <Text>{selectedMeal.title}</Text>
       <Button
         title='Go Back'
         onPress={() => {
-          props.navigation.goBack();
+          navigation.goBack();
         }}
       />
     </View>

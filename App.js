@@ -43,7 +43,11 @@ export default function App() {
           }}
         />
         <Stack.Screen name='CategoryMeal' component={CategoryMealScreen} />
-        <Stack.Screen name='MealDetails' component={MealDetailScreen} />
+        <Stack.Screen
+          name='MealDetails'
+          component={MealDetailScreen}
+          options={({ route }) => ({ title: route.params.name })}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

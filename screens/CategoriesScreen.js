@@ -6,14 +6,14 @@ import { CATEGORIES } from '../data/dummy-data';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import CategoryGridTile from '../components/CategoryGridTile';
 
-const CategoriesScreen = props => {
+const CategoriesScreen = ({ navigation }) => {
   const renderGridItem = itemData => {
     return (
       <CategoryGridTile
         title={itemData.item.title}
         color={itemData.item.color}
         onSelect={() => {
-          props.navigation.navigate('CategoryMeal', {
+          navigation.navigate('CategoryMeal', {
             categoryId: itemData.item.id,
           });
         }}
