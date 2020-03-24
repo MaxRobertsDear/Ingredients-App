@@ -3,10 +3,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+const Tab = createBottomTabNavigator();
 
 import CategoriesScreen from './screens/CategoriesScreen';
 import CategoryMealScreen from './screens/CategoryMealScreen';
 import MealDetailScreen from './screens/MealDetailScreen';
+import FavoritesScreen from './screens/FavouritesScreen';
 import Colors from './constants/Colors';
 
 const fetchFonts = () => {
@@ -30,8 +34,8 @@ export default function App() {
 
   const Stack = createStackNavigator();
 
-  return (
-    <NavigationContainer>
+  const MealsNavigationController = () => {
+    return (
       <Stack.Navigator>
         <Stack.Screen
           name='Categories'
@@ -42,13 +46,63 @@ export default function App() {
             headerTintColor: Colors.accentColor,
           }}
         />
-        <Stack.Screen name='CategoryMeal' component={CategoryMealScreen} />
+        <Stack.Screen
+          name='CategoryMeal'
+          component={CategoryMealScreen}
+          options={{
+            title: 'Category Meal',
+            headerTintColor: Colors.accentColor,
+          }}
+        />
         <Stack.Screen
           name='MealDetails'
           component={MealDetailScreen}
-          options={({ route }) => ({ title: route.params.name })}
+          options={({ route }) => ({
+            headerTitle: route.params.name,
+            headerTintColor: Colors.accentColor,
+          })}
         />
       </Stack.Navigator>
+    );
+  };
+
+  const FavoritesNavigationController = () => {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen
+          name='Favorites'
+          component={FavoritesScreen}
+          options={{
+            title: 'Your Favorites',
+            headerStyle: { backgroundColor: Colors.primaryColor },
+            headerTintColor: Colors.accentColor,
+          }}
+        />
+        <Stack.Screen
+          name='MealDetails'
+          component={MealDetailScreen}
+          options={{
+            title: 'Meal Details',
+            headerTintColor: Colors.accentColor,
+          }}
+        />
+      </Stack.Navigator>
+    );
+  };
+
+  return (
+    <NavigationContainer>
+      <Tab.Navigator
+        tabBarOptions={{
+          activeTintColor: Colors.accentColor,
+        }}
+      >
+        <Tab.Screen name='Meals' component={MealsNavigationController} />
+        <Tab.Screen
+          name='Favourites'
+          component={FavoritesNavigationController}
+        />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
